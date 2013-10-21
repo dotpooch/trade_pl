@@ -1,0 +1,12 @@
+<div class='description'>
+
+  <% unless @security.prices.empty? %>
+
+    <%= render 'securities/partials/prices_existing' %>
+
+  <% else %>
+
+    <%= render 'securities/partials/price_new' %>
+
+  <% end %>
+</div>

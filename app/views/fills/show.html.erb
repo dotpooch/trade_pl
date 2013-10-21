@@ -1,0 +1,67 @@
+<%= link_to 'Index', fills_path, class: "btn btn-info .btn_large" %>  
+<%= link_to 'edit', edit_fill_path(@fill.stub), class: "btn btn-warning .btn_large" %>     
+<%= link_to 'destroy', fill_path(@fill.stub), :confirm => 'Are you sure you want to destroy this fill?', :method => :delete, class: "btn btn-danger .btn_large" %>
+
+<table class="table table-striped table-bordered table-condensed">
+
+<tr>
+<td><%= "Symbol" %></td>
+<td><%= @fill.symbol %></td>
+<tr>
+
+<tr>
+<td><%= "Fill Type" %></td>
+<td><%= @fill.ft %></td>
+<tr>
+
+<tr>
+<td><%= "Date" %></td>
+    <%= td_long_date(@fill.date) %>
+<tr>
+
+<tr>
+<td><%= "Price" %></td>
+    <%= td_money(@fill.price,4) %>
+<tr>
+
+<tr>
+<td><%= "Quantity" %></td>
+    <td><%= @fill.quantity %></td>
+<tr>
+
+<tr>
+<td><%= "Gross Principal" %></td>
+    <%= td_money(@fill.gp,2) %>
+<tr>
+
+<tr>
+<td><%= "Commissions" %></td>
+    <%= td_money(@fill.commission,2) %>
+<tr>
+
+<tr>
+<td><%= "SEC Fees" %></td>
+    <%= td_money(@fill.sec_fee,2) %>
+<tr>
+
+<tr>
+<td><%= "Net Principal" %></td>
+    <%= td_money(@fill.np,2) %>
+<tr>
+
+<tr>
+<td><%= "Nickname" %></td>
+<td><%= @fill.s %></td>
+<tr>
+
+<tr>
+<td><%= "Transaction" %></td>
+<td><%= link_to @fill.trans, transaction_path(@fill.trans) %></td>
+
+<tr>
+<tr>
+<td><%= "Trade" %></td>
+<td><%= link_to @fill.ts, trade_path(@fill.ts) %></td>
+<tr>
+
+</table>

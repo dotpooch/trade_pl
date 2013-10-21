@@ -1,0 +1,13 @@
+<div class='notes'>
+<% unless @security.notes.nil? || @security.notes == '' %><br />
+<h3>
+notes
+</h3> 
+<ul>
+<li>
+<%= @security.notes %>
+</li>
+</ul>
+
+<% end %>
+</div>

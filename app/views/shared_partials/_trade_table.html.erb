@@ -1,0 +1,14 @@
+<tbody>
+<tr>
+
+  <%= td(trade.symbol) %>
+  <%= td( link_to trade.stub, trade_path(trade.stub) ) %>
+  <%= td(trade.long_or_short) %>
+  <%= td_money(trade.net_profit_loss,2) %>
+  <%= td_percent(trade.roi, 100, 1) %>
+  <%= td_short_date(trade.start_date) %>
+  <%= td_short_date(trade.end_date) %>
+  <%= td_int(trade.holding_period) %>
+
+</tr>
+</tbody>

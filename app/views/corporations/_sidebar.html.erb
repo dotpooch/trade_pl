@@ -1,0 +1,25 @@
+<ul class="unstyled">
+
+<li>
+<p>
+<%= @corp.old_names.empty? ? "" : render('formerly') %>
+</p>
+</li>
+
+<li>
+<p> 
+<%= @corp.desc.nil? ? "" : list_div(@corp.description) %>
+</p>
+</li>
+
+<li>
+<p>
+<%= @corp.jottings.nil? ? "" : list_div(@corp.jottings) %>
+</p>
+</li>
+
+<li>
+<%= link_to "edit", edit_corporation_path(@corp.stub), class: "btn btn-mini" %>
+</li>
+
+</ul>

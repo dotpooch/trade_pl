@@ -1,0 +1,56 @@
+<h3>order fills</h3>
+  
+<table class="table table-striped table-bordered table-condensed">
+  
+<thead>
+  <tr>
+    <th class="list_item_fill_type">type</th>
+    <th class="list_item_fill_date">date</th>
+    <th class="list_item_fill_symbol">symbol</th>
+    <th class="list_item_fill_name">name</th>
+    <th class="list_item_fill_quantity">quantity</th>
+    <th class="list_item_fill_transaction_stub">transaction</th>
+    <th class="list_item_fill_trade_stub">trade</th>
+    <th class="list_item_fill_price">price</th>
+    <th class="list_item_fill_gross_principal">gross principal</th>
+    <th class="list_item_fill_commission">commission</th>
+    <th class="list_item_fill_sec_fee">SEC fee</th>
+    <th class="list_item_fill_total_fees">total fees</th>
+    <th class="list_item_fill_net_principal">net principal</th>
+    <th class="list_item_fill_jottings">jottings</th>
+    <th class="list_item_fill_jottings">fill name</th>
+    <th>links</th>
+  </tr>
+</thead>
+
+<tbody>
+
+<% @fills.each do |fill| %>
+  <tr>
+    <td class="list_item_fill_type"><%= fill.fill_type %></td>
+    <%= td_short_date(fill.date) %>
+    <td><%= fill.symbol %></td>
+    <td><%#= link_to fill.stub, fill_path(fill.stub) %></td>
+    <td><%= fill.quantity %></td>
+    <td><%= link_to fill.transaction_stub, transaction_path(fill.transaction_stub) %></td>
+    <td><%= link_to fill.ts, trade_path(fill.ts) %></td>
+    <%= td_money(fill.price,4) %>
+    <%= td_money(fill.gross_principal,2) %>
+    <%= td_money(fill.commission,2) %>
+    <%= td_money(fill.sec_fee,2) %>
+    <%= td_money(fill.fees,2) %>
+    <%= td_money(fill.net_principal,2) %>
+    <td><%= fill.jottings %></td>
+    <td>
+    <%= fill.stub %>
+	</td>
+    <td>
+    <%= link_to 'show', fill_path(fill.stub), class: "btn btn-info btn_mini" %>
+    <%= link_to 'edit', edit_fill_path(fill.stub), class: "btn btn-warning btn_mini" %>
+    <%= link_to 'destroy', fill_path(fill.stub), :confirm => 'Are you sure you want to destroy this fill?', :method => :delete, class: "btn btn-danger btn_mini" %>
+    </td>
+  </tr>
+<% end %>
+
+</tbody>
+</table>

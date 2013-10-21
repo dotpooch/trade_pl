@@ -1,0 +1,12 @@
+<div class='description'>
+<% unless @security.description.nil? || @security.description == '' %><br />
+<h3>
+description
+</h3> 
+<ul>
+<li>
+<%= "#{@security.description}" %>
+</li>
+</ul>
+<% end %>
+</div>

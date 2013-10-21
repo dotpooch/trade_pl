@@ -1,0 +1,19 @@
+<dt>
+<%= link_to "Preferred Equities".upcase, preferred_equity_path(@company.alt_name), class: "btn" %>
+</dt>
+
+<dd>
+<%=
+
+if @company.preferred_equities.empty?
+  link_to "None. Add Preferred Equities", preferred_equity_path(@company.alt_name), class: "btn btn-link btn-mini"
+else
+  link_to "Add Preferred Equities", preferred_equity_path(@company.alt_name), class: "btn btn-link btn-mini"
+  @company.preferred_equities.each do |preferred|
+    preferred.inspect
+  end
+end
+ 
+%>
+
+</dd>

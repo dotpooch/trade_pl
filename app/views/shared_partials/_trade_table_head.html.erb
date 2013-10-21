@@ -1,0 +1,37 @@
+<h3>
+Trades
+</h3>
+
+<thead>
+
+<tr>
+
+<%
+  titles = words(%w|
+  symbol
+  alias
+  direction
+  profit_(loss)
+  roi
+  entry_date
+  exit_date
+  duration
+  |)
+%>
+
+<% titles.each do |title| %>
+  <%= th("profitability",title)%>
+<% end %>
+
+  <%#= th("profitability","symbol")%>
+  <%#= th("profitability","alias")%>
+  <%#= th("profitability","direction")%>
+  <%#= th("profitability","profit (loss)")%>
+  <%#= th("profitability","roi")%>
+  <%#= th("profitability","entry date")%>
+  <%#= th("profitability","exit date")%>
+  <%#= th("profitability","holding period")%>
+
+</tr>
+
+<thead>

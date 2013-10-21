@@ -1,0 +1,20 @@
+  <th>
+    <td> date </td>
+    <td> open </td>
+    <td> high </td>
+    <td> low </td>
+    <td> close </td>
+    <td> volume </td>
+    <td> adjusted_close </td>
+  </th>
+  <% security.prices.each do |data_set| %>
+    <tr>
+      <td> <%= data_set.date %> </td>
+      <td> <%= data_set.open %> </td>
+      <td> <%= data_set.high %> </td>
+      <td> <%= data_set.low %> </td>
+      <td> <%= data_set.close %> </td>
+      <td> <%= data_set.volume %> </td>
+      <td> <%= data_set.adjusted_close %> </td>
+    </tr>
+  <% end %>

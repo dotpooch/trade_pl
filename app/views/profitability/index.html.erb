@@ -1,0 +1,35 @@
+<h5>
+Profitability ~
+<h5>
+
+<table id="sortable_list" class="table table-striped table-bordered table-condensed">
+  
+  <thead>
+    <%= th("Profitability","Cycle Period") %>
+    <%= th("Profitability","Performance") %>
+    <%= th("Profitability","Profit (Loss)") %>
+    <%= th("Profitability","Accuracy Percentage") %> 
+    <%= th("Profitability","# of Trades") %> 
+    <%= th("Profitability","Accuracy Ratio") %>
+    <%= th("Profitability","Impact Ratio") %>
+  </thead>
+  
+  <tbody>
+  
+    <% @profitability.each do |i| %>
+
+      <tr>
+        <%= td( link_to i.cycle, profitability_path(i.nickname) ) %>
+        <%= td_deci(i.performance,2) %>
+        <%= td_money(i.profit_loss,2) %>
+        <%= td_percent(i.accuracy_perc,100,0) %>
+        <%= td_int(i.total_count) %>
+        <%= td_deci(i.accuracy,2) %>
+        <%= td_deci(i.impact,2) %>
+      </tr>
+    
+    <% end %>
+    
+  </tbody>
+  
+<table>

@@ -1,0 +1,307 @@
+/*
+ * This is a manifest file that'll automatically include all the stylesheets available in this directory
+ * and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
+ * the top of the compiled file, but it's generally better to create a new file per style scope.
+ *= require_self
+ *= require_tree .
+*/
+
+@import "bootstrap";
+body { padding-top: 60px; }
+@import "bootstrap-responsive";
+
+
+/* mixins, variables, etc. */
+
+$grayMediumLight: #eaeaea;
+
+/* universal */
+
+html {
+  overflow-y: scroll;
+}
+
+body {
+  padding-top: 60px;
+}
+
+section {
+  overflow: auto;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.center {
+  text-align: center;
+  h1 {
+    margin-bottom: 10px;
+  }
+}
+
+/* typography */
+
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1;
+}
+
+h1 {
+  font-size: 3em;
+  letter-spacing: -2px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+h2 {
+  font-size: 1.7em;
+  letter-spacing: -1px;
+  margin-bottom: 30px;
+  text-align: center;
+  font-weight: normal;
+  color: $grayLight;
+}
+
+p {
+  font-size: 1.1em;
+  line-height: 1.7em;
+}
+
+#sortable_list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font: Arial, Helvetica, Geneva, sans-serif;
+  position: relative;
+}
+
+#sortable_list li.header div{
+  background_color: #ccc;
+  font-weight: bold;
+  cursor: default;
+}
+
+#sortable_list li div{
+  display: block;
+  float: left;
+  border-bottom: 1px solid  #ccc;
+  border-right: 1px solid  #ccc;
+  padding: 3px 5px;
+}
+
+#sortable_list li div.listitem_date{width: 80px; border-left:1px solid #ccc;}
+#sortable_list li div.listitem_open{width: 50px;}
+#sortable_list li div.listitem_high{width: 50px;}
+#sortable_list li div.listitem_lowh{width: 50px;}
+#sortable_list li div.listitem_close{width: 50px;}
+#sortable_list li div.listitem_volume{width: 70px;}
+#sortable_list li div.listitem_adjusted_close{width: 70px;}
+
+.clearfix:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+    }
+
+/* header */
+
+#logo {
+  float: left;
+  margin-right: 10px;
+  font-size: 1.7em;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  padding-top: 9px;
+  font-weight: bold;
+  line-height: 1;
+  &:hover {
+    color: white;
+    text-decoration: none;
+  }
+}
+
+/* footer */
+
+footer {
+  margin-top: 45px;
+  padding-top: 5px;
+  border-top: 1px solid $grayMediumLight;
+  color: $grayLight;
+  a {
+    color: $gray;
+    &:hover { 
+      color: $grayDarker;
+    }
+  }  
+  small { 
+    float: left; 
+  }
+  ul {
+    float: right;
+    list-style: none;
+    li {
+      float: left;
+      margin-left: 10px;
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+body {
+  background-color: #fff;
+  color: #333;
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size: 13px;
+  line-height: 18px; }
+
+p, ol, ul, td {
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size: 13px;
+  line-height: 18px; }
+
+pre {
+  background-color: #eee;
+  padding: 10px;
+  font-size: 11px; }
+
+a {
+  color: #000;
+  &:visited {
+    color: #666; }
+  &:hover {
+    color: #fff;
+    background-color: #000; } }
+
+div {
+  &.field, &.actions {
+    margin-bottom: 10px; } }
+
+#notice {
+  color: green; }
+
+.field_with_errors {
+  padding: 2px;
+  background-color: red;
+  display: table; }
+
+#error_explanation {
+  width: 450px;
+  border: 2px solid red;
+  padding: 7px;
+  padding-bottom: 0;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+  h2 {
+    text-align: left;
+    font-weight: bold;
+    padding: 5px 5px 5px 15px;
+    font-size: 12px;
+    margin: -7px;
+    margin-bottom: 0px;
+    background-color: #c00;
+    color: #fff; }
+  ul li {
+    font-size: 12px;
+    list-style: square; } }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+/* set the background-color to red */
+.navbar-inner
+{
+    background-color: LightBlue ;
+    /* remove the gradient */
+    background-image: none;
+    /* set font color to white */
+    color: black;
+}   
+
+/* menu items */
+
+    /* set the background of the menu items to pink and default color to white */
+
+        .navbar .nav > li > a {
+          background-color: LightBlue ;   
+          color: black;
+
+        }
+
+
+    /* set hover and focus to lightblue */
+    .navbar .nav > li > a:focus,
+    .navbar .nav > li > a:hover {
+      background-color: lightblue;
+      color: black;
+    }
+        /* set active item to darkgreen */
+        .navbar .nav > .active > a,
+        .navbar .nav > .active > a:hover,
+        .navbar .nav > .active > a:focus {
+
+          background-color: LightBlue ;
+          color: black;
+        }
+
+    /* set font color and background of the project name (brand) */
+
+    .navbar .brand 
+    {
+        background-color: LightBlue ;
+        color: black;}

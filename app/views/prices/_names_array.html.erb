@@ -1,0 +1,7 @@
+<% if equity.names.size > 1 %>
+  <td>
+    <%= render "names", :equity => equity %>
+  </td>
+<% else %>
+    <%= td( link_to equity.names.last, price_path(equity.symbols.last) ) %>
+<% end %>

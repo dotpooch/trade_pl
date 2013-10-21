@@ -1,0 +1,57 @@
+<div class='description'>
+
+<h3>yield data</h3>
+  
+<ul>
+  <li>date</li>
+  <li>open</li>
+  <li>high</li>
+  <li>low</li>
+  <li>close</li>
+  <li>volume</li>
+  <li>adjusted_close</li>
+</ul>
+
+Kaminari.paginate_array(my_array_object).page(params[:page]).per(10)
+
+<%#= Kaminari.paginate_array(@yields).page(1).per(10) %>
+
+
+  <%# y.fields.keys.each_pair do |key,value| %>
+
+<% @yields.each do |y| %>
+  <ul>
+    <li><%= y.ticker %></li>
+    <li><%= y.name %></li>
+    <li><%= y.cusip %></li>
+    <li><%= y.index %></li>
+    <li><%= y.date %></li>
+
+    <li><%= y.monday_high %></li>
+    <li><%= y.monday_low %></li>
+    <li><%= y.monday_close %></li>
+
+    <li><%= y.tuesday_open %></li>
+    <li><%= y.tuesday_high %></li>
+    <li><%= y.tuesday_low %></li>
+    <li><%= y.tuesday_close %></li>
+
+    <li><%= y.wednesday_open %></li>
+    <li><%= y.wednesday_high %></li>
+    <li><%= y.wednesday_low %></li>
+    <li><%= y.wednesday_close %></li>
+
+    <li><%= y.thursday_open %></li>
+    <li><%= y.thursday_high %></li>
+    <li><%= y.thursday_low %></li>
+    <li><%= y.thursday_close %></li>
+
+    <li><%= y.friday_open %></li>
+    <li><%= y.friday_high %></li>
+    <li><%= y.friday_low %></li>
+    <li><%= y.friday_close %></li>
+  </ul>
+
+<% end %>
+
+</div>

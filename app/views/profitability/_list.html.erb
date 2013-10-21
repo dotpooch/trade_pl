@@ -1,0 +1,40 @@
+<% @profitability.each do |i| %>
+<h5>
+Profitability ~
+<h5>
+<h3>
+ <%= "#{i.cycle}" %></br>
+</h3>
+
+<table>
+
+  <tr>
+    <td colspan="8">
+      <%= render 'performance',  :cycle => i %> 
+    </td>
+  </tr>
+  
+
+  <tr>
+    <td colspan="4">  <%= render 'accuracy',     :cycle => i %> </td>
+    <td colspan="4">  <%= render 'impact',       :cycle => i %> </td>
+  </tr>
+
+  <tr>
+    <td colspan="14">
+      <%= render 'general', :cycle => i %> 
+    </td>
+  </tr>
+
+  <tr>
+    <td><%= "Nickname: #{link_to_unless_current i.nickname, profitability_path(i.nickname)}" %></td>
+  </tr>
+
+</table>
+</br>
+</br>
+</br>
+</br>
+</br>
+
+<% end %>

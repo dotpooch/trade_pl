@@ -1,0 +1,35 @@
+<table id="sortable_list" class="table table-striped table-bordered table-condensed">
+
+<thead>
+
+  <tr>
+    <th colspan="3">
+    Accuracy
+    </th>
+  </tr>
+
+  <tr>
+    <th colspan="1"></th>
+    <th>Count</th>
+    <th>Unit</th>
+  </tr>
+
+</thead>
+
+<tbody>
+
+  <tr>
+    <td colspan="1"><%= "Wins : Losses" %></td>
+    <%= td_deci(cycle.accuracy,2) %>
+    <%= td_deci(cycle.unit_accuracy,2) %>
+  </tr>
+
+  <tr>
+    <td colspan="1"><%= "Wins : Total" %></td>
+    <%= td_percent(cycle.accuracy_perc,100,0) %>
+    <%= td_percent(cycle.unit_accuracy_perc,100,0) %>
+  </tr>
+
+</tbody>
+
+</table>

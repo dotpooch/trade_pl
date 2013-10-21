@@ -1,0 +1,64 @@
+<div class='trades'>
+
+<table>
+<th>
+</th>
+<% @trades.each do |trade| %>
+</tr>
+<td>
+<%= trade.date %>
+</td>
+<td>
+<%= trade.quantity %>
+</td>
+<td>
+<%= trade.price %>
+</td>
+<td>
+<%= trade.transaction_ref %>
+</td>
+<td>
+<%= trade.sub_trade_ref %>
+</td>
+</tr>
+<% end %>
+
+</table>
+
+<h3>
+<%#= link_to "Add a Trade to #{@security.name}", new_security_trade_path(@security.ticker) %>
+</h3>
+
+<%# unless @security.trades.empty? %>
+<h3>
+trades
+</h3>
+
+<%# if @security.trades %>
+<%# @security.trades.each do |trade| %>
+
+<%#= trade.type %>,
+<%#= trade.name %>,
+<%#= trade.description %>,
+<%#= trade.notes %>,
+<%#= trade.profit_loss %>,
+<%#= trade.holding_period %>,
+<%#= trade.complexity %>,
+<%#= trade.capital_used %>,
+<%#= trade.return %>,
+<%#= trade.commissions %>,
+<%#= trade.other_fees %>
+</br>
+<%# end %>
+<%# end %>
+
+
+<ul>
+<li>
+<%#= @security.trades %>
+</li>
+</ul>
+
+<%# end %>
+
+</div>

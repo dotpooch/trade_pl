@@ -1,0 +1,23 @@
+<div class = 'new_price' >
+<%= semantic_form_for @price do |f| %>
+  
+  <%= f.input :ticker %>
+  <%= f.input :name %>
+  <%= f.input :cusip %>
+  <%= f.input :date %>
+  <%= f.input :open %>
+  <%= f.input :high %>
+  <%= f.input :low %>
+  <%= f.input :close %>
+  <%= f.input :volume %>
+  <%= f.input :adjusted_close %>
+
+  <%= f.input :file, :as => :file %>
+  <%= f.input :folder, :as => :check_boxes %>
+
+  <%= f.actions do %>
+    <%= f.action :submit %>
+  <% end %>
+
+<% end %>
+</div>

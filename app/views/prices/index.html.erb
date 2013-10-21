@@ -1,0 +1,26 @@
+We have price data for the following <%= @equities.count %> securities:
+
+<table id="sortable_list" class="table table-striped table-bordered table-condensed">
+  <thead>
+  <tr>
+    <%= th("security","name") %>
+    <%= th("security","symbol") %>
+    <%= th("security","start date") %>
+    <%= th("security","end date") %>
+    <%= th("security","count") %>
+  </tr>
+  </thead>
+  <tbody>
+
+<% @equities.each do |equity| %>
+  <tr>
+    <%= render "names_array",   :equity => equity %>
+    <%= render "symbols_array", :equity => equity %>
+    <%= td_short_date(equity.start_date) %>
+    <%= td_short_date(equity.end_date) %>
+    <%= td_int(equity.count) %>
+  </tr>
+<% end %>
+</tbody>
+
+</table>

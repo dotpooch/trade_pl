@@ -1,0 +1,20 @@
+<h2>total new securities added: <%= @securities.size%></br></h2>
+
+<% @securities.each do |security| %>
+
+<table>
+<%= render 'securities/partials/index/name_ticker',       :_name => security.name, :_ticker => security.ticker %>
+<%= render 'securities/partials/index/alternate_names',   :_names => security.names %>
+<%= render 'securities/partials/index/alternate_tickers', :_tickers => security.tickers %>
+<%= render 'securities/partials/index/description',       :_desc => security.description %>
+<%= render 'securities/partials/index/notes',             :_notes => security.notes %>
+<%= render 'securities/partials/index/links',             :_security => security %>
+</table>
+<br />
+
+<% end %>
+
+
+<br />
+
+<%= link_to 'New Security', new_security_path %>

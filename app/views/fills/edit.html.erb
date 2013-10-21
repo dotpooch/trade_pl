@@ -1,0 +1,25 @@
+<%= link_to 'Index', fills_path, class: "btn btn-info .btn_large" %>  
+<%= link_to 'show', fill_path(@fill.stub), class: "btn btn-info .btn_large" %>     
+<%= link_to 'destroy', fill_path(@fill.stub), :confirm => 'Are you sure you want to destroy this fill?', :method => :delete, class: "btn btn-danger .btn_large" %>
+
+
+<h1>Editing fill</h1>
+
+
+<%= semantic_form_for @fill do |f| %>
+  
+  <%= f.input :date %>
+  <%= f.input :fill_type %>
+  <%= f.input :commission %>
+  <%= f.input :price %>
+  <%= f.input :quantity %>
+  <%= f.input :s %>
+  <%= f.input :sym %>
+  <%= f.input :trans %>
+  <%= f.input :ts %>
+
+  <%= f.actions do %>
+    <%= f.action :submit, class: "btn btn-warning .btn_large" %>
+  <% end %>
+
+<% end %>

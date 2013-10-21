@@ -1,0 +1,12 @@
+<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered table-condensed table-bordered">
+
+
+<tbody>
+
+<% @trades.each do |trade| %>
+  <%= render 'shared_partials/trade_table', :trade => trade %>
+<% end %>
+
+</tbody>
+
+</table>

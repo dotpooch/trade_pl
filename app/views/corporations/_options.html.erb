@@ -1,0 +1,19 @@
+<dt>
+<%= link_to "Options".upcase, option_path(@company.alt_name), class: "btn" %>
+</dt>
+
+<dd>
+<%=
+
+if @company.options.empty?
+  link_to "None. Add Options", option_path(@company.alt_name), class: "btn btn-link btn-mini"
+else
+  link_to "Add Options", option_path(@company.alt_name), class: "btn btn-link btn-mini"
+  @company.options.each do |option|
+    option.inspect
+  end
+end
+ 
+%>
+
+</dd>

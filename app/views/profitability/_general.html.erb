@@ -1,0 +1,79 @@
+<table id="sortable_list" class="table table-striped table-bordered table-condensed">
+
+<thead>
+  <tr>
+    <th colspan="16">General Profitability Metrics</th>
+  </tr>
+
+  <tr>
+    <th></th>
+    <th></th>
+    <th colspan="2">Profit (Loss)</th>
+    <th colspan="2">Capital Invested</th>
+    <th></th>
+    <th>Avg.</th>
+    <th colspan="2">Fees</th>
+  </tr>
+
+  <tr>
+    <th></th>
+    <th>Trades</th>
+    <th>Total</th>
+    <th>Average</th>
+    <th>Total</th>
+    <th>Average</th>
+    <th>ROI%</th>
+    <th>Duration</th>
+    <th>Comm.</th>
+    <th>Total</th>
+  </tr>
+
+
+</thead>
+
+<tbody>
+
+<tr>
+<%= td("All") %>
+<%= td_int(cycle.total_count) %>
+<%= td_money(cycle.profit_loss,0) %>
+<%= td_money(cycle.avg_gain_loss,0) %>
+<%= td_money(cycle.total_invested,0) %>
+<%= td_money(cycle.avg_invested,0) %>
+<%= td_percent(cycle.avg_return,100,1) %>
+<%= td_int(cycle.avg_holding_period) %>
+<%= td_money(cycle.commissions,0) %>
+<%= td_money(cycle.total_fees,0) %>
+</tr>
+
+<tr>
+<%= td("Wins") %>
+<%= td_int(cycle.gain_count) %>
+<%= td_money(cycle.gains,0) %>
+<%= td_money(cycle.avg_gain,0) %>
+<%= td_money(cycle.invested_in_gains,0) %>
+<%= td_money(cycle.avg_invested_for_gains,0) %>
+<%= td_percent(cycle.avg_gain_return,100,1) %>
+<%= td_int(cycle.avg_gain_holding_period) %>
+<%= td_money(cycle.gain_commissions,0) %>
+<%= td_money(cycle.gain_total_fees,0) %>
+</tr>
+
+<tr>
+<%= td("Losses") %>
+<%= td_int(cycle.loss_count) %>
+<%= td_money(cycle.losses,0) %>
+<%= td_money(cycle.avg_loss,0) %>
+<%= td_money(cycle.invested_in_losses,0) %>
+<%= td_money(cycle.avg_invested_for_losses,0) %>
+<%= td_percent(cycle.avg_loss_return,100,1) %>
+<%= td_int(cycle.avg_loss_holding_period) %>
+<%= td_money(cycle.loss_commissions,0) %>
+<%= td_money(cycle.loss_total_fees,0) %>
+<%#= td_int(cycle.trades_opened) %>
+<%#= td_int(cycle.trades_closed) %>
+</tr>
+        
+</tbody>
+
+</table>

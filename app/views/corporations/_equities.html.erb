@@ -1,0 +1,19 @@
+<dt>
+<%= link_to "Equities".upcase, equity_path(@company.alt_name), class: "btn" %>
+</dt>
+
+<dd>
+<%=
+
+if @company.equities.empty?
+  link_to "None. Add Equities", equity_path(@company.alt_name), class: "btn btn-link btn-mini"
+else
+  link_to "Add Equities", equity_path(@company.alt_name), class: "btn btn-link btn-mini"
+  @company.equities.each do |equity|
+    equity.inspect
+  end
+end
+ 
+%>
+
+</dd>

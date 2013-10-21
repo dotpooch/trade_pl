@@ -1,0 +1,28 @@
+<div class='previous'>
+
+
+<h3>
+<%= "previously used" if @security.old_tickers? || @security.old_names? %>
+</h3>
+ <%= @security.old_names? %>
+
+<ul>
+  
+<% if @security.old_tickers? %>
+
+<li>
+<%= "ticker: #{@security.old_tickers.shift}" if @security.old_tickers.count == 1 %><br />
+<%= "tickers: #{@security.old_tickers.inject {|txt, i| txt + ',' }   }" if @security.old_tickers.count > 1 %>
+</li>
+<% end %>
+
+<% if @security.old_names? %>
+<li>
+<%= "name: #{@security.old_names.shift}" if @security.old_names.count == 1 %><br />
+<%= "names: #{@security.old_names.inject {|txt, i| txt + ',' }   }" if @security.old_names.count > 1 %>
+</li>
+<% end %>
+
+</ul>
+
+</div>

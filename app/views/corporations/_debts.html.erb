@@ -1,0 +1,16 @@
+<dt>
+<%= link_to "Debts".upcase, debt_path(@company.alt_name), class: "btn" %>
+</dt>
+
+<dd>
+<% if @company.debts.empty? %>
+  None.
+<%=  link_to "None. Add Debts", debt_path(@company.alt_name), class: "btn btn-link btn-mini" %>
+<% else %>
+  link_to "Add Debts", debt_path(@company.alt_name), class: "btn btn-link btn-mini"
+  @company.debts.each do |debt|
+    debt.inspect
+  end
+<% end %>
+
+</dd>

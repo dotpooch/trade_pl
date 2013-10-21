@@ -1,0 +1,14 @@
+<table id="sortable_list" class="table table-striped table-bordered table-condensed">
+
+<% @corps.each do |c| %>
+
+<tr>
+<td>
+<%= link_to c[:name], corporation_path(c[:stub]) %>
+</td>
+</tr>
+
+<% end %>
+</table>
+
+
