@@ -29,6 +29,10 @@ end
 module Trade_PL
   class Application < Rails::Application
     Mongoid.logger = nil
+	
+	
+	# Heroku requires this to be false
+config.assets.precompile += %w( bootstrap.css )
   
     #config.middleware.use 'API'
 

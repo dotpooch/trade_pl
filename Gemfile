@@ -82,3 +82,8 @@ end
 #  #gem 'growl_notify' #tells you if tests pass or fail - mac
 #  gem 'libnotify' #tells you if tests pass or fail - ubuntu
 #end
+
+
+group :production do
+  gem 'thin'
+end
