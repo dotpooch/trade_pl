@@ -22,8 +22,8 @@ gem 'roo'
 gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
 gem "log_buddy"#, "~> 0.0.1"
 gem "random-word", "~> 1.3.0"
-gem "random-word-generator", "~> 0.0.1"
-gem 'webster'
+#gem "random-word-generator", "~> 0.0.1"
+#gem 'webster'
 
 
 #rack at version 1.4.1
