@@ -9,8 +9,8 @@ require "sprockets/railtie"
 require 'gchart'
 require 'fileutils'
 require 'log_buddy' 
-require 'webster'
-require 'random_word_generator'
+#require 'webster'
+#require 'random_word_generator'
 
 # FILE UPLOADING AND IMAGE PROCESSING
 require 'carrierwave'
