@@ -32,7 +32,8 @@ module Trade_PL
 	
 	
 	# Heroku requires this to be false
-config.assets.precompile += %w( bootstrap.css )
+	config.assets.initialize_on_precompile = false
+#config.assets.precompile += %w( bootstrap.css )
   
     #config.middleware.use 'API'
 
