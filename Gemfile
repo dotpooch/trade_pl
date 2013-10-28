@@ -85,5 +85,5 @@ end
 
 
 group :production do
-  gem 'thin'
+#  gem 'thin'
 end
