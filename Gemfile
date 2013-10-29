@@ -3,7 +3,7 @@ require 'rubygems'
 
 ruby '1.9.3'
 
-gem 'rails'#, '3.1.3'
+gem 'rails', '= 3.1.3'
 
 group :production do
   gem 'thin'
@@ -33,7 +33,6 @@ group :assets do
   gem 'coffee-rails', '~> 3.1.1'
   gem 'uglifier', '>= 1.0.3'
 end
-
 
 gem 'devise'
 gem 'kaminari'
