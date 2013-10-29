@@ -29,13 +29,13 @@ class Stub
         #word = "#{adj}_#{noun}"
 
         #word_1 = RandomWordGenerator.word
-        word_1 = RandomWord.nouns
+        word_1 = RandomWord.nouns.next
         begin
-          word_2 = RandomWord.nouns
+          word_2 = RandomWord.nouns.next
           #word_2 = RandomWordGenerator.word
         end until word_1[0,1] != word_2[0,1]
         begin
-          word_3 = RandomWord.nouns
+          word_3 = RandomWord.nouns.next
           #word_3 = RandomWordGenerator.word
         end until (word_1[0,1] != word_2[0,1] || word_2[0,1] != word_3[0,1])
         

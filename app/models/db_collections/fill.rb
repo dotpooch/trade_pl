@@ -232,6 +232,6 @@ Rules for Aggregating Fills
   end  
 
   def set_name
-    self.name = Stub.make unless name?
+    self.security_name = Stub.make unless security_name?
   end  
 end
