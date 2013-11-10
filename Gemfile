@@ -28,10 +28,11 @@ gem "random-word", "~> 1.3.0"
 group :assets do
   gem 'coffee-rails', '~> 3.1.1'
   gem 'uglifier', '>= 1.0.3'
-end
-  gem 'bootstrap-sass' #for basic formating of css
   gem 'sass-rails',   '~> 3.1.5'
   gem 'font-awesome-sass-rails'
+end
+  gem 'bootstrap-sass' #for basic formating of css
+
 
 gem 'devise'
 gem 'kaminari'
