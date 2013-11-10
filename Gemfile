@@ -35,7 +35,6 @@ end
 
 gem 'devise'
 gem 'kaminari'
-gem 'bootstrap-kaminari-views'
 gem 'formtastic'
 gem 'jquery-rails'
 
