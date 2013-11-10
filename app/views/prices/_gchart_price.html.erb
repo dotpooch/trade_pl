@@ -1,0 +1,12 @@
+<div class='closes'>
+
+<%=image_tag Gchart.line(
+  :data => @closes,
+  :size => '500x300',
+  :bar_colors => '08088A',
+  :stacked => true,
+  :title => "#{symbol} Closes - Last 200 Days",
+  :bg => 'BDBDBD'
+  )
+ %>
+</div>

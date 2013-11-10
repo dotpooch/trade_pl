@@ -17,4 +17,5 @@ class Equity < Security
 
   ### CLASS METHODS ###
 
+  
 end

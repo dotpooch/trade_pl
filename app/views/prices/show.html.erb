@@ -1,6 +1,7 @@
-your securities that use or have used this ticker: 
+<%= "The database has the following prices for #{@prices.first.names.last} (#{@prices.first.symbols.last}):" %><br>
 
-<%#= link_to "All the Securities you have traded", securities_path %><br>
+<%#= link_to "All Price Data", prices_path %><br>
 </br>
 
+<%= render 'gchart_price', :symbol => @prices.first.symbols.last %>
 <%= render 'shared_partials/prices' %>

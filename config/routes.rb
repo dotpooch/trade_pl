@@ -22,10 +22,10 @@ Trade_PL::Application.routes.draw do
   resources :fills,               :id => decimals_in_id
   resources :profitability,       :id => decimals_in_id
 
-  match 'profitability/lifetime' => 'profitability#lifetime', :as => 'lifetime_profit' 
-  match 'profitability/annual'   => 'profitability#years',    :as => 'annual_profit'
-  match 'profitability/years'    => 'profitability#years',    :as => 'years_profit'
-  match 'profitability/monthly'  => 'profitability#monthly',  :as => 'monthly_profit'
-  match 'profitability/months'   => 'profitability#months',   :as => 'months_profit'
+  #match 'profitability/lifetime' => 'profitability#lifetime', :as => 'lifetime_profit' 
+  #match 'profitability/annual'   => 'profitability#years',    :as => 'annual_profit'
+  #match 'profitability/years'    => 'profitability#years',    :as => 'years_profit'
+  #match 'profitability/monthly'  => 'profitability#monthly',  :as => 'monthly_profit'
+  #match 'profitability/months'   => 'profitability#months',   :as => 'months_profit'
 
 end

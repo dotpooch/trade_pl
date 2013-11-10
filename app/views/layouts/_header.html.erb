@@ -1,19 +1,24 @@
-<header class="navbar navbar-fixed-top">
+<header class="navbar">
   <div class="navbar-inner">
     <div class="container">
         <ul class="pull-left">
+          <%= link_to "Home", home_path, class: "btn btn-info btn-large" %>
         </ul>
-      <nav>
-        <div class="navbar navbar-fixed-top navbar-text">
+      <nav class="navbar  nav-pills" role="navigation">
         <ul class="nav pull-right">
-          <%= nav_bar("Corporations",    corporations_path) %>
-          <%= nav_bar("Prices",       prices_path) %>
-          <%= nav_bar("Fills",        fills_path) %>
-          <%= nav_bar("Transactions", transactions_path) %>
-          <%= nav_bar("Trades",       trades_path) %>
-          <%= nav_bar("Profitability",        profitability_index_path) %>
+          <%= link_to "Corporations",  corporations_path, class: "btn btn-info btn-large" %>
+          <%= link_to "Prices",        prices_path, class: "btn btn-info btn-large" %>
+          <%= link_to "Fills",         fills_path, class: "btn btn-info btn-large" %>
+          <%= link_to "Transactions",  transactions_path, class: "btn btn-info btn-large" %>
+          <%= link_to "Trades",        trades_path, class: "btn btn-info btn-large" %>
+          <%= link_to "Profitability", profitability_index_path, class: "btn btn-info btn-large" %>
+          <%#= nav_bar("Corporations",  corporations_path) %>
+          <%#= nav_bar("Prices",        prices_path) %>
+          <%#= nav_bar("Fills",         fills_path) %>
+          <%#= nav_bar("Transactions",  transactions_path) %>
+          <%#= nav_bar("Trades",        trades_path) %>
+          <%#= nav_bar("Profitability", profitability_index_path) %>
         </ul>
-        </div>
       </nav>
     </div>
   </div>

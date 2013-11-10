@@ -52,8 +52,7 @@ class Price
   scope :no_security,              where(:security => nil)
   scope :all_sort_by_ticker_date,  all.order_by([:ticker, :asc],[:date, :asc])
 
-  scope :day_gain,                ->(_gain) { 
-  where(:daytime_return.gte => _gain) } 
+  scope :day_gain,                ->(_gain) { where(:daytime_return.gte => _gain) } 
   scope :day_loss,                ->(_loss) { where(:daytime_return.lte => _loss) }
   scope :named,                   ->(_name) { where(:names => _name) }
   scope :with_ticker,             ->(_tckr) { where('ticker' => _tckr.downcase) }
@@ -112,7 +111,7 @@ class Price
     def purge_security
       update_attributes(:security => nil, :names => nil, :symbols => nil)
     end
-
+	
   protected
  
     def format_ticker; self.ticker =  self.ticker.downcase unless self.ticker.nil? end  #gsub(/^[0-9\.]/, ''))
@@ -123,6 +122,19 @@ class Price
 
     public
     
+	  def closes(_symbol)
+	    closes = []
+	    prices = where(:symbols => _symbol).order_by([:date, :desc]).limit(200).only(:close)
+		prices.reverse.each do |price|
+		  closes << price.close
+		end
+		closes
+	  end
+	
+      def most_recent_date_by_symbol(_symbol) 
+	    where(:symbols => _symbol).order_by([:date, :desc]).limit(1).first
+	  end
+
       def most_recent
         all.distinct(:created_at).sort.last
       end
@@ -132,6 +144,16 @@ class Price
         [dates.first, dates.last]
       end
 
+	  def closing_prices
+        prices = self.prices.desc(:date).limit(100)
+        prices = prices.sort! { |x, y| x[:date] <=> y[:date] }
+        @recent_closes = []   
+        prices.each {|price| @recent_closes << price.close}
+        prices
+      end
+
+
+	  
       def aggregated_data(_name)
         price = where(:names => _name).first
         if price

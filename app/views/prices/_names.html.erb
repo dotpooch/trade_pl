@@ -3,7 +3,7 @@
 
   <% names.reverse.each do |name| %>
   <tr>
-    <%= td(link_to name, price_path(equity.symbols.last) ) %>
+    <td><%= td(link_to name, price_path(equity.symbols.last), class: "btn btn-info btn-mini" ) %></td>
   </tr>
   <% end %>
 

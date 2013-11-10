@@ -7,7 +7,7 @@ class Fill
   before_save   :set_fees, :set_gross_principal, :set_net_principal, :set_name
 
   ### RELATIONSHIPS ###
-  belongs_to :security,     class_name:'Security',     inverse_of: :fills#, autosave: true
+  belongs_to :corporation,  class_name:'Corporation',  inverse_of: :fills#, autosave: true
   belongs_to :trade,        class_name:'Trade',        inverse_of: :fills#, autosave: true
   belongs_to :transaction,  class_name:'Transaction',  inverse_of: :fills
   belongs_to :order,        class_name:'Order',        inverse_of: :fills
@@ -18,7 +18,8 @@ class Fill
   ### FIELDS ###
   field :date,  :type => DateTime, :as => :date
   field :o,     :type => String,   :as => :order_id
-  field :sym,   :type => String,   :as => :symbol
+  field :sym,   :type => Array,   :as => :symbols
+  field :names,   :type => Array
   field :s,     :type => String,   :as => :stub
   field :q,     :type => Money,    :as => :quantity#, :as => :shares
   field :ft,    :type => String,   :as => :fill_type
@@ -34,6 +35,15 @@ class Fill
   field :f,     :type => Money,    :as => :fees,            :default => nil
   field :np,    :type => Money,    :as => :net_principal
   field :j,     :type => String,   :as => :jottings
+  
+  ### VALIDATIONS ###
+  
+  validates :p, presence: true
+  validates :c, presence: true
+  validates :q, presence: true
+  validates :sf, presence: true
+  validates :ft, presence: true
+  validates_format_of :ft, :with => /^Buy Long$|^Sell Long$|^Sell Short$|^Cover Short$|^Share Split$|^Share Dividend$|^Dividend Reinvestment$|^Option Expiration$/
 
   ### SCOPES ###
   scope :of_type,     ->(_types)  { any_in(:ft =>  _types) }
@@ -81,6 +91,47 @@ Rules for Aggregating Fills
     def longs;          long_entries.concat(long_exits);    end
     def shorts;         short_entries.concat(short_exits);  end
 
+	def make(_attributes)
+	  @attributes = _attributes
+	  add_name_if_needed
+	  fill = Fill.create(@attributes)
+	  
+	  prices = YahooReader.new(fill.sym, fill.names, Price).prices
+	  prices.each do |price|
+	    price.merge!({:symbols => fill.sym, :names => fill.names})
+	    Price.create(price)
+      end
+		
+	  Equity.find_or_create_by(symbols:fill.sym, names:fill.names)
+      Corporation.make(fill.names)
+	end
+	
+	def add_prices_if_needed
+	  unless @attributes[:names]
+	    symbol  = @attributes[:symbols].last
+		fill    = Fill.where(:sym => symbol).first
+		if fill
+		  @attributes[:names] = fill.names
+		else
+    	  name = NasdaqReader.new(symbol).name
+	      @attributes[:names] = [name]
+		end
+	  end
+	end
+
+	def add_name_if_needed
+	  unless @attributes[:names]
+	    symbol  = @attributes[:symbols].last
+		fill    = Fill.where(:sym => symbol).first
+		if fill
+		  @attributes[:names] = fill.names
+		else
+    	  name = NasdaqReader.new(symbol).name
+	      @attributes[:names] = [name]
+		end
+	  end
+	end
+	
     def name_fills_trades_transactions
       symbols = Fill.all.distinct(:sym)
       symbols.each {|sym| rename(sym)}
@@ -204,7 +255,9 @@ Rules for Aggregating Fills
   end
 
   ### INSTANCE METHODS ###
-  def symbol=(_symbol);     self.sym = _symbol.downcase;                         end
+  def symbol;    sym.last;  end
+  def name;      names.last;  end
+  #def symbol=(_symbol);     self.sym = _symbol.downcase;                         end
 
   def fill_type=(_type)
     long   = { 1 => "Buy Long", 6 => "Sell Long" }
@@ -232,6 +285,6 @@ Rules for Aggregating Fills
   end  
 
   def set_name
-    self.security_name = Stub.make unless security_name?
+    self.stub = Stub.make unless stub?
   end  
 end

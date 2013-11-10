@@ -98,7 +98,7 @@ class Security
       end
 
       def check_for_updates
-        new_prices? ? append_new_prices(last_update) : index_types
+        new_prices? ? append_those_new_prices(last_update) : index_types
       end
 
       def new_prices?
@@ -118,7 +118,7 @@ class Security
         all.distinct(:last_update).sort.last
       end
 
-      def append_new_prices(_last_update)
+      def append_those_new_prices(_last_update)
         names = Price.where(:updated_at.gte => _last_update, :security_id => nil).distinct(:names)
         update_securities(names)
       end

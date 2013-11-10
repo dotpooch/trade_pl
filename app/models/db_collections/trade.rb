@@ -135,7 +135,7 @@ class Trade
     def append_fills(_fill)
       @trade.quantity           += _fill.quantity if entry_transaction?(_fill)
       @trade.commission         += _fill.commission
-      @trade.other_fees         += _fill.fees
+      @trade.other_fees         += _fill.sec_fee
       @trade.gross_profit_loss  += _fill.gross_principal
       @trade.net_profit_loss    += _fill.net_principal
     end
@@ -188,13 +188,6 @@ class Trade
   end
   def long_or_short;           long == true ? "long" : "short";               end
 
-    def add_subsequent_fills(_fill)
-      @trade.quantity           += _fill.quantity
-      @trade.gross_profit_loss  += _fill.gross_principal
-      @trade.commission         += _fill.commission
-      @trade.other_fees         += _fill.fees
-      @trade.net_profit_loss    += _fill.net_principal
-    end
 
     def calculate_average_price
       @trade.price     = @trade.gross_principal / @trade.quantity

@@ -1,15 +1,67 @@
 <% provide(:title, 'Home') %>
 
 <div class="center hero-unit">
-  <h2>Company Logo</h2>
+  <h2>Work in Progress Corporation</h2>
 
   <h3>
-    Tagline!
+
   </h3>
 
-  <h4>
-    This website is a demonstration of the organization and display of profit and losses from a security trading account.  At this point all the data has been seeded.  
-  </h4>
-
+  
   <%#= link_to "Sign up now!", '#', class: "btn btn-large btn-primary" %>
 </div>
+
+  <h4>
+    This website is a demonstration of the organization and display of profits and losses from a security trading account.
+  </h4>
+
+  </br>
+  <h5>
+    At this point, the Fill Data is seeded and mimics data that might come from a brokerage api.  The other data is calculated or downloaded from the Nasdaq and Yahoo!Finance.		
+  </h5>
+  </br>
+
+
+  <ul class="list-style">
+ 	<li>
+	When an Order is placed with a brokerage, that order is broken up and executed in different Fills, which may be at different prices and times.
+ 	</li>
+ 	<li>
+	The Fills are aggregated by this app to create Transactions meant to reflect the original orders.
+ 	</li>
+ 	<li>
+	A series of Transactions are combined to create a Trade once a position has been completely closed.
+ 	</li>
+ 	<li>
+	Completed Trades are analysed for their profitability.
+ 	</li>
+    <li>
+	The timing Orders, Fills and Transactions are important for Trade profitability.
+      <ul class="list-unstyled">
+ 	    <li>
+	       Historical price data can be analysed for the accuracy of that timing 
+ 	    </li>
+ 	    <li>
+	       This feature exits but has been removed temporarily due to it's proprietary nature. 
+ 	    </li>
+ 	    <li>
+	       It will be reinstated at some point in the future. 
+ 	    </li>
+      </ul>
+    </li>
+ 	<li>
+	  Sometimes, Trades are composed of multiple securities on the same underlying parent entity. For instance, an Equity hedged by an Option. 
+      <ul class="list-unstyled">
+ 	    <li>
+	      The Corporations tab is the basis to easily see what price data exists for analysis.
+ 	    </li>
+      </ul>
+ 	  <li>
+	  The data is organized this way because I have found that this is the way I search for it.
+ 	  </li>
+ 	  <li>
+	  I intend to clarify how the data is displayed and organized over time.
+ 	  </li>
+	
+	
+  </ul>

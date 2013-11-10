@@ -35,8 +35,9 @@ class FillsController < ApplicationController
   end
 
   def update
-    @fill = Fill.where(:s => (params[:fill][:s])).first
-    if @fill.update_attributes!(params[:fill])
+    @fill = Fill.where(:id => (params[:fill][:id])).first
+    if @fill
+	  @fill.update_attributes!(params[:fill])
       flash[:success] = "Update: Successful"
       render(:show)
     else

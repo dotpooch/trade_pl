@@ -51,19 +51,6 @@
 
   private
 
-    def join_securities
-    F
-=begin
-      Security.named(names).update_attribute(:corp => self)
-      relation = security["_type"].downcase.pluralize
-      self.send(security["_type"].downcase.pluralize) = security
-      self.stubs = names.map { |name| Global.format_string(name) }
-=end
-    end
-    
-    def relation()
-      security["_type"].downcase.pluralize
-    end
 
   ### CLASS METHODS ###
   
@@ -96,7 +83,11 @@
       def update_stubs
         self.alpha.each { |company| company.save }
       end
-
+	  
+	  def make(_names)
+        find_or_create_by(names:_names)
+	  end
+	  
     private
   
   end

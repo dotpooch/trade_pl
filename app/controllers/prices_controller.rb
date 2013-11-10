@@ -5,9 +5,10 @@ class PricesController < ApplicationController
   end
 
   def show
-    @prices = Price.where(:symbols => params[:id])
+	@prices = Price.where(:symbols => params[:id]).page(params[:page]).per(250)
     if @prices
       @prices
+	  @closes = Price.closes(params[:id])
     else
       redirect_to prices_path
     end

@@ -21,7 +21,6 @@ gem "random-word", "~> 1.3.0"
 #gem "random-word-generator", "~> 0.0.1"
 #gem 'webster'
 
-
 #rack at version 1.4.1
 
 # Gems used only for assets and not required
@@ -36,6 +35,7 @@ end
 
 gem 'devise'
 gem 'kaminari'
+gem 'bootstrap-kaminari-views'
 gem 'formtastic'
 gem 'jquery-rails'
 

@@ -35,7 +35,7 @@
   <% @corp.send(type).each do |i| %>
   
       <tr>
-        <%= td(i.symbol) %>
+        <td><%= link_to i.symbol, price_path(i.symbol), class: "btn btn-info btn-mini" %></td>
         <%= i.start_date ? td_short_date(i.start_date) : td("-") %>
         <%= i.end_date ? td_short_date(i.end_date) : td("-") %>
         <%= i.count > 0 ? td_int(i.count) : td("-") %>

@@ -17,7 +17,7 @@ class Global
       _string.downcase.gsub(white_space, '.').gsub(end_period, '').gsub(regex_junk, '')
     end
 
-    def regex_alpha_num_decimal;  /[A-Za-z0-9\.]{1,}/;                                      end
+    def regex_alpha_num_decimal;  /[A-Za-z0-9_\.]{1,}/;                                      end
     def regex_accepted_formats;   /json|csv|xml|yaml/;                                      end
     
     def invert_fieldnames_and_types(_model)

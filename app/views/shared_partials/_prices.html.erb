@@ -1,3 +1,6 @@
+
+<%= paginate @prices %>
+
 <h3>price data</h3>
 
 <table class="table table-striped table-bordered table-condensed">
@@ -23,7 +26,7 @@
     <%= td_money(price.high,2) %>
     <%= td_money(price.low,2) %>
     <%= td_money(price.close,2) %>
-    <% unless price.volume.nil? %>
+    <% if price.volume.nil? %>
       <td>-</td>
     <% else %>
       <%= td_big_int(price.volume) %>

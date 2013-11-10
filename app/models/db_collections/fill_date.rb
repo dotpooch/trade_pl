@@ -152,6 +152,103 @@ class FillDate
   
   class << self
 
+    def most_recent_date_by_symbol(_symbol)
+	  all.order_by([:date, :desc]).limit(1).first
+	end
+  
+    def make
+	  index_values = YahooReader.new(["%5EGSPC"], ["S&P 500 Index"], FillDate).prices
+	  previous_day, week_with_holiday = 0, false 
+	  index_values.reverse.each do |today|
+	    today.delete(:open)
+		today.delete(:high)
+		today.delete(:low)
+		today.delete(:close)
+		today.delete(:volume)
+		today.delete(:adj_close)
+        if ( previous_day == 0 && today[:date].month == 1 ) then
+		  today.merge!(day_after) if today[:date].day == 2
+			today.merge!(same_week) unless today[:date].cwday.to_i == 1
+		  week_with_holiday = true unless today[:date].cwday.to_i == 1
+		else
+          week_with_holiday = false if normal_weekend?(previous_day, today[:date])
+		  if new_day_or_normal_weekend?(previous_day, today[:date])
+            today.merge!(same_week) if week_with_holiday == true
+		  else
+            today.merge!(day_after)
+			today.merge!(same_week) unless today[:date].cwday.to_i == 1
+			week_with_holiday = true unless today[:date].cwday.to_i == 1
+		  end
+		end
+		previous_day = today[:date]
+      end
+
+	  previous_day, week_with_holiday, before_holiday = 0, false, false 
+	  index_values.each do |today|
+        if (today[:damc] == true) then
+		  week_with_holiday = true
+		  before_holiday = true
+		else
+		  if previous_day == 0
+		    week_with_holiday = today[:wwmc]
+		  else
+  		    week_with_holiday = false if today[:date].cwday.to_i == 5
+		  end
+		  if before_holiday == true then
+			today[:dbmc] = true
+		    before_holiday = false
+		  end
+	      today.merge!(same_week) if week_with_holiday == true
+		end
+		previous_day = today[:date]
+	  end
+
+	  index_values.each do |today|
+		today[:d] = today[:date]
+	    today.delete(:date)
+	    today.delete(:open)
+		today.delete(:high)
+		today.delete(:low)
+		today.delete(:close)
+		today.delete(:volume)
+		today.delete(:adj_close)
+        FillDate.create(today)
+ 	  end
+	end
+	
+	def new_day_or_normal_weekend?(previous_day, today)
+	  next_day?(previous_day, today) || normal_weekend?(previous_day, today)
+	end
+	
+	def next_day?(previous_day, today)
+      (previous_day + 1) == today
+	end
+
+	def normal_weekend?(previous_day, today)
+      (previous_day.cwday.to_i == 5 && today.cwday.to_i == 1 && previous_day + 3 == today)
+	end
+	
+    def day_after_same_week
+      {:wwmc => true, :damc => true}
+	end
+	
+	def day_before_same_week
+      {:wwmc => true, :dbmc => true}
+	end
+
+    def day_after
+      {:damc => true}
+	end
+
+    def day_before
+      {:dbmc => true}
+	end
+
+	def same_week
+      {:wwmc => true}
+	end
+
+	
     def map_queriable_fields
       model, criteria  = FillDate, {}
       types  = Global.invert_fieldnames_and_types(model)

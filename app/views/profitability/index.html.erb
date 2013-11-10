@@ -19,7 +19,7 @@ Profitability ~
     <% @profitability.each do |i| %>
 
       <tr>
-        <%= td( link_to i.cycle, profitability_path(i.nickname) ) %>
+        <%= td( link_to i.cycle, profitability_path(i.nickname), class: "btn btn-info btn-mini" ) %>
         <%= td_deci(i.performance,2) %>
         <%= td_money(i.profit_loss,2) %>
         <%= td_percent(i.accuracy_perc,100,0) %>
