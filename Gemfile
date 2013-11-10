@@ -30,8 +30,8 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
   gem 'sass-rails',   '~> 3.1.5'
   gem 'font-awesome-sass-rails'
-end
   gem 'bootstrap-sass', '= 3.0.2.0' #for basic formating of css
+end
 
 
 gem 'devise'
