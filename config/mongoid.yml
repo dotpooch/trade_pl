@@ -1,11 +1,12 @@
 development:
-  host: localhost
   database: trade_analysis_dev
-  allow_dynamic_fields: false
-
-test:
   host: localhost
+  allow_dynamic_fields: false
+    
+test:
   database: trade_analysis_test
+  host: localhost
+  allow_dynamic_fields: false
 
 # set these environment variables on your prod server
 production:

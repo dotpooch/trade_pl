@@ -3,8 +3,7 @@ require 'rubygems'
 
 ruby '1.9.3'
 
-gem 'rails', '3.2.15'
-#gem 'rails', '= 3.1.3'
+gem 'rails', '= 3.1.3'
 
 group :production do
   gem 'thin'
@@ -27,15 +26,16 @@ gem "random-word", "~> 1.3.0"
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'coffee-rails', '~> 3.2'
+  gem 'coffee-rails', '~> 3.1.1'
   gem 'uglifier', '>= 1.0.3'
-  gem 'sass-rails', '>= 3.2'
   gem 'font-awesome-sass-rails'
+  #gem "twitter-bootstrap-rails", "~> 1.3.0"
   gem 'bootstrap-sass', '= 3.0.2.0' #for basic formating of css
+  gem 'sass-rails',   '~> 3.1.5'
 end
 
 
-gem 'devise'
+#gem 'devise'
 gem 'kaminari'
 gem 'formtastic'
 gem 'jquery-rails'

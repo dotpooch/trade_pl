@@ -1,0 +1,21 @@
+development:
+  sessions:
+    default:
+    database: trade_analysis_dev
+    hosts:
+      host: localhost
+      options:
+    options:
+    allow_dynamic_fields: false
+    
+test:
+  sessions:
+    default:
+    database: trade_analysis_test
+    hosts:
+      host: localhost
+    allow_dynamic_fields: false
+
+# set these environment variables on your prod server
+production:
+  uri: <%= ENV['MONGOHQ_URL'] %>

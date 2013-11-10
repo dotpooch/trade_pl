@@ -1,25 +1,29 @@
 <ul class="unstyled">
 
+<% unless @corp.old_names.empty? %>
 <li>
 <p>
-<%= @corp.old_names.empty? ? "" : render('formerly') %>
+<%= render('formerly') %>
 </p>
 </li>
+<% end %>
 
+<% unless @corpdesc.nil? %>
 <li>
 <p> 
-<%= @corp.desc.nil? ? "" : list_div(@corp.description) %>
+<%= list_div(@corp.description) %>
 </p>
 </li>
+<% end %>
 
+<% unless @corp.jottings.nil? %>
 <li>
 <p>
-<%= @corp.jottings.nil? ? "" : list_div(@corp.jottings) %>
+<%= list_div(@corp.jottings) %>
 </p>
 </li>
+<% end %>
 
-<li>
-<%= link_to "edit", edit_corporation_path(@corp.stub), class: "btn btn-mini" %>
-</li>
+<%#= link_to "edit", edit_corporation_path(@corp.stub), class: "btn btn-mini" %></li>
 
 </ul>
