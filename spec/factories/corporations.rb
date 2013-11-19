@@ -1,9 +1,5 @@
 FactoryGirl.define do
 
- # factory :user do
-#    name "John Doe"
-  #end
-
   factory :corporation do
     names    ["ABC Corporation"]
 	desc      "test description"
