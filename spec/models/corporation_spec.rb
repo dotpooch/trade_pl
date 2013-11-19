@@ -1,304 +1,203 @@
 require 'spec_helper'
 
 describe Corporation do
-  it { PriceMetric.new.should be_a(PriceMetric) }
-
-  it 'creates a resource' do
-    expect(response).to respond_with_content_type(:json)
+  it { should be_a(Corporation) }
+  it { should be_timestamped_document }
+  
+  ### CALLBACKS ###
+  pending "Callbacks" do
+    describe "Before Save" do
+      it "makes slug" do
+        @corp = FactoryGirl.build(:corporation)
+        expect(@corp).to receive(:make_slug)
+		@corp.save
+      end
+    end
   end
-  
-    field :stubs,    :type => Array
-  field :names,    :type => Array
-  
-  field :desc,     :type => String
-  field :jottings, :type => String
-  
-  
-  expect {
-  #action
-}.to change { Model.count }.by(1)
-  
+
+  ### RELATIONSHIPS ###
+  describe "Relationships" do
+    it{should have_many(:debts).of_type(Debt).as_inverse_of(:institution) }
+    it{should have_many(:preferred_equities).of_type(PreferredEquity).as_inverse_of(:institution) }
+    it{should have_many(:equities).of_type(Equity).as_inverse_of(:institution) }
+    it{should have_many(:options).of_type(Option).as_inverse_of(:institution) }
+  end	
   
   ### FIELDS ###  
-  it { should have_field(:n).of_type(String) }#.with_alias(:name) }
-  it { should have_field(:ty).of_type(String) }#.with_alias(:security_type) }
-  it { should have_field(:ti).of_type(String) }#.with_alias(:security_type) }
-  it { should have_field(:cu).of_type(String) }#.with_alias(:cusip) }
-  it { should have_field(:sd).of_type(Date) }#.with_alias(:start_date) }
-  it { should have_field(:ed).of_type(Date) }#.with_alias(:end_date) }
-  it { should have_field(:c).of_type(Integer) }#.with_alias(:prices_count) }
+  describe "Fields" do
+    it { should have_field(:slug).of_type(String) }
+    it { should have_field(:names).of_type(Array) }
+    it { should have_field(:desc).of_type(String) }
+    it { should have_field(:jottings).of_type(String) }
+  end
   
   ### VALIDATIONS ###
-  it { should validate_presence_of(:n).on(:create) }
-  #it { should validate_presence_of(:ty).on(:create) }
-  it { should validate_presence_of(:sd).on(:create) }
-  it { should validate_presence_of(:ed).on(:create) }
-  it { should validate_presence_of(:c) }
-  it { should validate_numericality_of(:c).greater_than(0) }
+  pending "Validations" do
+    it { should validate_presence_of(:names) }
+  end
+    
+  ### INSTANCE METHODS ###
+  describe "Instance Methods" do
+	describe "public" do
+      
+	  describe "#name" do
+	    before(:each) do
+		  @corp = FactoryGirl.create(:corporation)
+		end
+	  
+	    it "returns String" do
+		  expect(@corp.name).to be_a(String)
+		end
+	    it "returns current name" do
+		  expect(@corp.name).to eq @corp.names.last
+		end
+	  end
+
+	  describe "#old_names" do
+  	    it "returns Array" do
+		  @corp = FactoryGirl.create(:corporation)
+		  expect(@corp.old_names).to be_an(Array)
+		end
+
+        context "when no previously used names" do
+          it "is empty" do
+		    @corp = FactoryGirl.create(:corporation)
+		    expect(@corp.old_names).to be_empty
+		  end
+		end
+
+		context "when 1 or more previously used names" do
+  	      before(:each) do
+		    @multi_corp = FactoryGirl.create(:corp_with_many_names)
+		  end
+		  
+  	      it "returns Array" do
+		    expect(@multi_corp.old_names).to be_an(Array)
+		  end
+  	      it "returns all old names" do
+		    expect(@multi_corp.old_names).to eq @multi_corp.names[0...-1].reverse
+		  end
+	      it "is ordered from newest to oldest" do
+		    expect(@multi_corp.old_names).to eq @multi_corp.names[0...-1].reverse
+		  end
+          it "does not return the current name" do
+		    expect(@multi_corp.old_names).to_not include(@multi_corp.names.last)
+		  end
+		end
+		 
+	  end
+
+	  pending "#make_slug" do
+	    before(:each) do
+          @corp = FactoryGirl.create(:corporation)
+		end
+
+  	    it "creates pretty url slug" do
+		  expect(@corp.slug).to eq Slug.make(@corp)
+		end
+  	    it "is not nil" do
+		  expect(@corp.slug).to_not be_nil
+		end
+	  end
+
+	  describe "#securities" do
+	    before(:each) do
+		  @corp = FactoryGirl.create(:corp_with_associations)
+		end
+	  
+	    it "returns an Array" do
+		  expect(@corp.securities).to be_an(Array)
+		end
+  	    it "includes 'equities'" do
+		  expect(@corp.securities).to include("equities")
+	    end
+  	    it "includes 'options'" do
+		  expect(@corp.securities).to include("options")
+	    end
+  	    it "includes 'debts'" do
+		  expect(@corp.securities).to include("debts")
+	    end
+  	    it "includes 'preferred_equities'" do
+		  expect(@corp.securities).to include("preferred_equities")
+	    end
+  	    it "is ordered from the largest to smallest # of related securities by class" do
+		  expect(@corp.securities).to eq ["debts","options","equities","preferred_equities"]
+	    end
+	  end
+	  
+    end
+  end
+	
+
+=begin
+    def create_stubs
+    end
+
+    def securities
+      relationships = ['equities','options','debts','preferred_equities']
+      relationships.sort { |a, b| self.send(b).count <=> self.send(a).count }
+    end
+
+    def join
+      join_securities
+    end
+
+  private
+  
+  
+  
+  Hey,
+
+This isn't doing much to test the *behavior* of the object.  Why do
+you want to encrypt the password?  Probably so you can authenticate,
+right?  I would probably start off with
+
+describe "authenticate" do
+  it "finds the user with the given credentials" do
+    u = User.create!(:login => "pat", :password => "password")
+    User.authenticate("pat", "password").should eq u
+  end
+end
+
+That might be a bit much to chew at first though.  So you can write
+some interim tests that you then throw away.  For example, you might
+do
+
+describe User, "when saved" do
+  it "should create a salt" do
+    u = User.create(:login => "pat", :password => "password")
+    u.salt.should_not be_blank
+  end
+
+  it "should create a hashed pass" do
+    u = User.create(:login => "pat", :password => "password")
+    u.hashed_pass.should_not be_blank
+  end
+end
+
+Once you have those passing, you can move to the User.authenticate
+spec.  Once *that* passes, you can throw away the salt/hashed_pass
+specs, because they're no longer useful.  They're testing
+implementation at this point, and were just a tool to get you where
+you wanted to go in small steps.
+
+Pat
+
+  
+  
+=end
+
+
+  
+
+  
+  
+  
+  
 
   ### CLASS METHODS ###
 
-  describe ".update" do
-=begin
-    subject {Price}
-    
-    context "PriceMetric needs updating" do
-
-      it "gets Price.all (only name)" do
-        subject.stub_chain(:where,:distinct,:sort).and_return([])
-        PriceMetric.update.should == ['name1']
-      end
-    end
-
-    context "Price and PriceMetric relationship" do
- 
-      it {PriceMetric.update.should == [] }
-
-      it "gets Price.all (only name)" do
-        subject.stub_chain(:where,:distinct,:sort).and_return(['name1'])
-        PriceMetric.update.should == ['name1']
-      end
-    end
-=end
-
-  end 
-
-
-  describe ".update_to_date?" do
-    subject {PriceMetric.send(:up_to_date?)}
-
-    context "True" do
-      it "returns empty Array" do
-        Price.stub_chain(:where,:distinct,:sort).and_return([])
-        subject.should == []
-      end
-    end
-
-    context "False" do
-      it "returns Array of Security Names to Update" do
-        Price.stub_chain(:where,:distinct,:sort) {['name1']}
-        subject.should == ['name1']
-      end
-    end
-
-  end
   
-  describe ".find_or_create" do
-    subject {PriceMetric.send(:find_or_create, "company_name")}
-
-    it "find or initialize PriceMetric" do
-      Price.stub_chain(:where,:distinct,:sort) {['name1']}
-      subject.should == ['name1']
-    end
-
-    metric = PriceMetric.find_or_initialize_by(:security_name => name)
-    metric.prices_count.nil? ? metric.prices_count = price_count(name) : metric.prices_count += price_count(name)
-    metric.start_date    = oldest_date(name)
-    metric.end_date      = newest_date(name)
-    metric.save
-  end
   
-  describe ".oldest_date" do
-    subject {PriceMetric.send(:oldest_date, "company_name")}
-
-    it "calls .get_price_date with 'company_name' and ':asc'" do
-      PriceMetric.should_receive(:get_price_date).with("company_name", :asc)
-      subject
-    end
-
-  end
-
-  describe ".newest_date" do
-    subject {PriceMetric.send(:newest_date, "company_name")}
-
-    it "calls .get_price_date with 'company_name' and ':desc'" do
-      PriceMetric.should_receive(:get_price_date).with("company_name", :desc)
-      subject
-    end
-
-  end
-
-  
-  describe ".price_count" do
-    subject {PriceMetric.send(:price_count, "company_name")}
-    let(:mongoid) { mock_model(Mongoid::Criteria).as_null_object }
-
-    it "gets count of new prices"  do
-      Price.should_receive(:where).with(n: "company_name", price_metrics: nil) {@mongoid}
-      @mongoid.should_receive(:count) {Integer}
-      subject
-    end
-  
-  end
-  
-  describe ".get_price_date" do
-    subject {PriceMetric.send(:get_price_date, "company_name", :asc)}
-    let(:mongoid) { mock_model(Mongoid::Criteria).as_null_object }
-    let(:date)    { Date.new(2011,12,15) }
-
-    it "queries Price.name" do
-      Price.stub(:only).with(:d) {@mongoid}
-      @mongoid.should_receive(:where).with(n: "company_name", price_metrics: nil) {@mongoid}
-      @mongoid.stub_chain(:order_by,:limit,:first,:date) {@date}
-      subject
-    end
-
-    it "returns Price.date" do
-      Price.stub_chain(:only,:where,:order_by,:limit,:first) {Price}
-      Price.stub(:date) {@date}
-      subject.should == @date
-    end
-
-    it "gets newest Price"  do
-      Price.should_receive(:only).with(:d) {@mongoid}
-      @mongoid.should_receive(:where).with(n: "company_name", price_metrics: nil) {@mongoid}
-      @mongoid.should_receive(:order_by).with([:d, :desc]) {@mongoid}
-      @mongoid.should_receive(:limit).with(1) {@mongoid}
-      @mongoid.should_receive(:first) {Price}
-      Price.stub(:date) {@date}
-      PriceMetric.send(:get_price_date, "company_name", :desc)
-    end
-
-    it "gets oldest Price"  do
-      Price.should_receive(:only).with(:d) {@mongoid}
-      @mongoid.should_receive(:where).with(n: "company_name", price_metrics: nil) {@mongoid}
-      @mongoid.should_receive(:order_by).with([:d, :asc]) {@mongoid}
-      @mongoid.should_receive(:limit).with(1) {@mongoid}
-      @mongoid.should_receive(:first) {Price}
-      Price.stub(:date) {@date}
-      subject
-    end
-    
-  end
-
-
-=begin
-  describe ".update_price_metrics" do
-
-    subject {PriceMetric.send(:update_price_metrics)}
-    it { subject.should_be == true }
-
-  end
-
-
-  describe ".price_count_for_security" do
-    it "returns Integer" do
-      Price.stub_chain(:where,:count,:to_i).and_return(1)
-      PriceMetric.send(:price_count_for_security, "company_name").should == 1
-    end
-
-  end
-
-
-=end
-
-
-=begin
-
-    let(:friend) { stub_model(User) }
-
-    before(:each) do
-      User.stub(where: User, fields: User, all: User)
-      friend.stub(interested_employers: ["Apple"])
-      friend.stub(fb_connections: ["100", "200"])
-      friend.stub(fb_user_id: "1")        
-      user.stub(fb_connections: ["101", "201"])
-      user.stub(fb_user_id: "2")
-    end
-
-      a.fb_matches_for_friend_employer_goals(user, friend)
-
-
-      it "returns empty Array" do
-        Price.stub_chain(:where,:distinct,:sort).and_return([])
-        subject
- PriceMetric.send(:up_to_date?)        
-      end
-    end
-
-    context "False" do
-      it "returns Array of Security Names to Update" do
-        Price.stub_chain(:where,:distinct,:sort).and_return(['name1'])
-        subject.should == ['name1']
-      end
-    end
-
-  end 
-=end
-
 end
-
-=begin
-  before :each do
-    @ticker = "TKR"
-    @price =  Price.new(
-      :date   => '2012/1/1/',
-      :ticker => @ticker,
-      :name   => 'Test Name, Ltd.',
-      :open   => 10,
-      :high   => 10,
-      :low    => 10,
-      :close  => 10
-    )
-  end
-
-
-#If your test isn't conceptually saying "Given input X, my result should always be Y" then you're probably testing the wrong thing. As always, there are exceptions to this rule, but I wouldn't break the rule without a very good reason.
-
-  # =>  #instance_method, => .class_method
-
-    
-    @data  = Price.stub('equities').and_return([@hash])
-    subject { @price }
-    it { should respond_to :name   }
-=end
-
-# 
-#
-
-=begin
-  it "is valid with valid attributes" do
-    @price.should be_valid
-  end
-
-  it "is not valid without a date" do
-    @price.date = nil
-    @price.should_not be_valid
-  end
-
-  it "is not valid without a ticker" do
-    @price.ticker = nil
-    @price.should_not be_valid
-  end
-
-  it "is not valid without a lowercase ticker" do
-    @price.valid?
-    @price.ticker.should == @ticker.downcase
-  end
-
-  it "is not valid without a name" do
-    @price.name = nil
-    @price.should_not be_valid
-  end
-
-  it "is not valid without an open price" do
-    @price.open = nil
-    @price.should_not be_valid
-  end
-
-  it "is not valid without a high price" do
-    @price.high = nil
-    @price.should_not be_valid
-  end
-
-  it "is not valid without a low price" do
-    @price.low = nil
-    @price.should_not be_valid
-  end
-
-  it "is not valid without a closing price" do
-    @price.close = nil
-    @price.should_not be_valid
-  end
-=end
 

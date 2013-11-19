@@ -5,10 +5,10 @@ class Option
   include Mongoid::Timestamps
 
   ### CALLBACKS ###
-  before_save :format_commitment, :create_tickers
+  #before_save :format_commitment, :create_tickers
 
   ### RELATIONSHIPS ###
-  belongs_to :corp,    class_name: 'Corporation',   inverse_of: :options
+  belongs_to :corporation,  class_name: 'Corporation',   inverse_of: :options
 
   ### FIELDS ###
   field :s,   :type => String,  :as => :symbol

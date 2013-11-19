@@ -1,11 +1,11 @@
 # encoding: utf-8
 
-class Preferred_Equity
+class PreferredEquity
   include Mongoid::Document
   include Mongoid::Timestamps
 
   ### RELATIONSHIPS ###
-  belongs_to :corporation,        class_name: 'Corporation',   inverse_of: :preferred_equities
+  belongs_to :corporation,  class_name: 'Corporation',   inverse_of: :preferred_equities
 
   ### FIELDS ###
 

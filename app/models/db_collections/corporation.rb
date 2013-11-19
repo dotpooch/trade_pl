@@ -5,18 +5,17 @@
   include Mongoid::Timestamps
 
   ### CALLBACKS ###
-  before_save :create_stubs
+  #before_save :make_slug
 
   ### RELATIONSHIPS ###
-  has_many  :debts,                class_name:'Debt',             inverse_of: :institution#, autosave: true
-  has_many  :preferred_equities,   class_name:'Preferred_Equity', inverse_of: :institution#, autosave: true
-  has_many  :equities,             class_name:'Equity',           inverse_of: :institution#, autosave: true
-  has_many  :options,              class_name:'Option',           inverse_of: :institution#, autosave: true
+  has_many  :debts,               class_name:'Debt',             inverse_of: :institution#, autosave: true
+  has_many  :preferred_equities,  class_name:'PreferredEquity',  inverse_of: :institution#, autosave: true
+  has_many  :equities,            class_name:'Equity',           inverse_of: :institution#, autosave: true
+  has_many  :options,             class_name:'Option',           inverse_of: :institution#, autosave: true
 
   ### FIELDS ###
-  field :stubs,    :type => Array
+  field :slug,     :type => String
   field :names,    :type => Array
-  
   field :desc,     :type => String
   field :jottings, :type => String
   
@@ -31,26 +30,17 @@
 
   public
 
-    def name;       names.last             end
-    def stub;       stubs.last             end
-    def old_names;  names[0...-1].reverse  end
-
-
-    def create_stubs
-      self.stubs = names.map { |name| Global.format_string(name) }
-    end
+    def name;       names.last                   end
+    def old_names;  names[0...-1].reverse        end
+    #def make_slug;  self.slug = Slug.make(self)  end
 
     def securities
       relationships = ['equities','options','debts','preferred_equities']
-      relationships.sort { |a, b| self.send(b).count <=> self.send(a).count }
-    end
-
-    def join
-      join_securities
+      relationships.sort { |a, b| send(b).size <=> send(a).size}
     end
 
   private
-
+=begin
 
   ### CLASS METHODS ###
   
@@ -91,5 +81,6 @@
     private
   
   end
+=end
 
 end

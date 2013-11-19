@@ -5,7 +5,7 @@ class Debt
   include Mongoid::Timestamps
 
   ### RELATIONSHIPS ###
-  belongs_to :corp,        class_name: 'Corporation',   inverse_of: :debts
+  belongs_to :corporation,  class_name: 'Corporation',  inverse_of: :debts
 
 
   ### FIELDS ###
