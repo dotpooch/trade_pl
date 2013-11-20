@@ -30,6 +30,7 @@ module Trade_PL
   class Application < Rails::Application
     Mongoid.logger = nil
 	
+	config.filter_parameters += [:password, :password_confirmation]
 	
 	# Heroku requires this to be false
 	config.assets.initialize_on_precompile = false
