@@ -1,6 +1,8 @@
 require 'api'
 Trade_PL::Application.routes.draw do
   
+  devise_for :users
+
   decimals_in_id   = Global.regex_alpha_num_decimal
   excepted_formats = Global.regex_accepted_formats
 
