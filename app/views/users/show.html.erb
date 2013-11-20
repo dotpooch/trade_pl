@@ -1,0 +1,26 @@
+your securities that use or have used this ticker: 
+
+ "All the Securities you have traded"
+  
+<table class="table table-striped table-bordered table-condensed">
+  
+<tbody>
+
+<tr><td>Nickname</td><td><%= @transaction.s %></td></tr>
+<tr><td>Date</td><%= td_long_date(@transaction.date) %></tr>
+<tr><td>Symbol</td><td><%= @transaction.sym %></td></tr>
+<tr><td>Fill Type</td><td><%= @transaction.ft %></td></tr>
+<tr><td>Quantity</td><td><%= @transaction.q %></td></tr>
+<tr><td>Price</td><%= td_money(@transaction.price,4) %></tr>
+<tr><td>Gross Principal</td><%= td_money(@transaction.gross_principal,2) %></tr>
+
+<tr><td>SEC Fees</td><%= td_money(@transaction.sec_fee,2) %></tr>
+<tr><td>Commission</td><%= td_money(@transaction.commission,2) %></tr>
+<tr><td>Total Fees</td><%= td_money(@transaction.fees,2) %></tr>
+
+<tr><td>Net Principal</td><%= td_money(@transaction.net_principal,2) %></tr>
+<tr><td>Jottings</td><td><%= @transaction.jottings %></td></tr>
+<tr><td>Trade Name</td><td><%= link_to @transaction.ts, trade_path(@transaction.ts) %></td></tr>
+
+</tbody> 
+</table> 

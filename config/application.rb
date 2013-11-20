@@ -7,6 +7,7 @@ require "rails/test_unit/railtie"
 require "sprockets/railtie"
 #require 'api'
 require 'gchart'
+require 'devise'
 require 'fileutils'
 require 'log_buddy' 
 #require 'webster'

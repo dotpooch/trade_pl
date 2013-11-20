@@ -35,7 +35,7 @@ group :assets do
 end
 
 
-#gem 'devise'
+gem 'devise'
 gem 'kaminari'
 gem 'formtastic'
 gem 'jquery-rails'

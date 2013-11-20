@@ -42,5 +42,4 @@ FactoryGirl.define do
     corporation
   end
   
-  
 end

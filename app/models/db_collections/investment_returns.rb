@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-class Investment_Returns
+class InvestmentReturns
   include Mongoid::Document
   include Mongoid::Timestamps
 

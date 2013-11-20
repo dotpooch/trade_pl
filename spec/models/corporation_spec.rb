@@ -5,7 +5,7 @@ describe Corporation do
   it { should be_timestamped_document }
   
   ### CALLBACKS ###
-  pending "Callbacks" do
+  describe "Callbacks" do
     describe "Before Save" do
       it "makes slug" do
         @corp = FactoryGirl.build(:corporation)
@@ -32,7 +32,7 @@ describe Corporation do
   end
   
   ### VALIDATIONS ###
-  pending "Validations" do
+  describe "Validations" do
     it { should validate_presence_of(:names) }
   end
     
@@ -87,11 +87,11 @@ describe Corporation do
 		 
 	  end
 
-	  pending "#make_slug" do
+	  describe "#make_slug" do
 	    before(:each) do
           @corp = FactoryGirl.create(:corporation)
 		end
-
+		
   	    it "creates pretty url slug" do
 		  expect(@corp.slug).to eq Slug.make(@corp)
 		end

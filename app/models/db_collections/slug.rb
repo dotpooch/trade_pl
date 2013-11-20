@@ -5,17 +5,21 @@ class Slug
   include Mongoid::Timestamps
 
   ### CALLBACKS ###
+  after_initialize :build_relationships
 
   ### RELATIONSHIPS ###
-  belongs_to :security, class_name: 'Security', inverse_of: :name_list
-  belongs_to :trade,    class_name: 'Trade',    inverse_of: :name
+  
+  # relationships are automatically created for every model in the models/db_collections folder
+  # after_initialize :build_relationships
   
   ### FIELDS ###
   field :app_generated_slugs,  :type => Array
   field :user_created_slugs,   :type => Array
-
-  ### METHODS ###
   
+  ### VALIDATIONS ###
+  validates_presence_of :app_generated_slugs
+
+  ### METHODS ###  
   ### INSTANCE METHODS ###
 
   public
@@ -24,37 +28,60 @@ class Slug
 	  user_created_slugs.nil? ? app_generated_slugs.last : user_created_slugs.last
 	end
 
+  private
+
+    def build_relationships
+	  clean_collection(db_collections).each { |model| make_association(model) }
+    end
+
+    def make_association(_model)
+	  Slug.belongs_to(_model.to_sym, {:class_name => _model.camelize, :inverse_of => :slug})
+	end	
+  
+    def db_collections
+	  # File.basename(Dir.getwd)
+	  Dir["app/models/db_collections/*.rb"]
+	end
+
+	def clean_collection(_models)
+	  _models.map! { |element| clean_filename(element) }
+	  _models.delete("slug")
+	  _models.delete("stub")
+	  _models
+	end
+	
+    def clean_filename(_file)
+	  _file.gsub("app/models/db_collections/", '').gsub(".rb", '')
+	end
+	
   ### CLASS METHODS ###
 
   class << self
   
     def make(_obj)
 	  @obj = _obj
-	  potential_slugs = send(obj_slug_method, @obj)
+	  potential_slugs = send(obj_slug_method_name, @obj)
 	  manufacture_slug(potential_slugs)
 	  @slug.slug
     end
   
-    def obj_slug_method
+    def obj_slug_method_name
 	  obj_class + "_slug"
 	end
-  
+	
+    def obj_class
+	  @obj.class.name.downcase
+	end
+
     def stub_exists?(_name)
       Stub.where(:name => _name).exists?
     end
 
 	def join
-	  @slug.relationship = @obj
+	  method = obj_class + "="
+	  @slug.send(method.to_sym, @obj)
 	end
 
-	def relationship
-	  obj_class.constantize
-	end
-	
-	def obj_class
-	  @obj.class.name.downcase
-	end
-	
 	def manufacture_slug(_potential_slugs)
 	  @slug = find_or_create_by(app_generated_slugs:_potential_slugs)
 	  #@slug.app_generated_slugs << _potential_slugs

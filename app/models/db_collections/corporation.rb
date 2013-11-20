@@ -5,7 +5,7 @@
   include Mongoid::Timestamps
 
   ### CALLBACKS ###
-  #before_save :make_slug
+  before_save :make_slug
 
   ### RELATIONSHIPS ###
   has_many  :debts,               class_name:'Debt',             inverse_of: :institution#, autosave: true
@@ -32,7 +32,7 @@
 
     def name;       names.last                   end
     def old_names;  names[0...-1].reverse        end
-    #def make_slug;  self.slug = Slug.make(self)  end
+    def make_slug;  self.slug = Slug.make(self)  end
 
     def securities
       relationships = ['equities','options','debts','preferred_equities']

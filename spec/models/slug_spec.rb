@@ -100,7 +100,7 @@ describe Slug do
 	    before(:each) do
   		  @slug = Slug.new
 		  file = "app/models/db_collections/corporation.rb"
-		  @file_name = @slug.send(:clean_filename)#$.with(file)
+		  @file_name = @slug.send(:clean_filename).with(file)
 		end
 	  
 	    it "takes a String" do
