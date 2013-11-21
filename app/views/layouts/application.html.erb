@@ -10,6 +10,7 @@
     <%= render 'layouts/shim' %> 
   </head>
   <body>
+  <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
     <%= render 'layouts/header' %> 
 
     <main role="main">
