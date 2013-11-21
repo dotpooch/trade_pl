@@ -22,10 +22,16 @@ describe User do
   
   ### FIELDS ###  
   describe "Fields" do
-    it { should have_field(:slug).of_type(String) }
-    it { should have_field(:names).of_type(Array) }
-    it { should have_field(:desc).of_type(String) }
-    it { should have_field(:jottings).of_type(String) }
+    it { should have_field(:email).of_type(String) }
+    it { should have_field(:encrypted_password).of_type(String) }
+    it { should have_field(:reset_password_token).of_type(String) }
+    it { should have_field(:reset_password_sent_at).of_type(Time) }
+    it { should have_field(:remember_created_at).of_type(Time) }
+    it { should have_field(:sign_in_count).of_type(Integer) }
+    it { should have_field(:current_sign_in_at).of_type(Time) }
+    it { should have_field(:last_sign_in_at).of_type(Time) }
+    it { should have_field(:current_sign_in_ip).of_type(String) }
+    it { should have_field(:last_sign_in_ip).of_type(String) }
   end
   
   ### VALIDATIONS ###
